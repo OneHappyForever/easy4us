@@ -47,7 +47,7 @@ def copy(src, dest, files):
 def clear(session):
     while True:
         res = session.get(base_url + "/decoder/%s/1" % args.decoder, headers=headers)
-        s = bs4.BeautifulSoup(res.content, features="lxml")
+        s = BeautifulSoup(res.content, features="lxml")
         inputs = s.find_all(attrs={"name": "file[]"})
         if len(inputs) < 1:
             break
@@ -60,7 +60,7 @@ def clear(session):
 
 
 def parse_upload_result(r):
-    s = bs4.BeautifulSoup(r.content, features="lxml")
+    s = BeautifulSoup(r.content, features="lxml")
     success = []
     failure = []
     for el in s.find_all("div", {"class": "alert-success"}):
@@ -76,7 +76,7 @@ def parse_upload_result(r):
 
 def upload(session, dir, files):
     r = session.get(base_url + "/decoder/%s" % args.decoder, headers=headers, timeout=300)
-    s = bs4.BeautifulSoup(r.content, features="lxml")
+    s = BeautifulSoup(r.content, features="lxml")
     el = s.find(id="uploadfileblue")
     if not el:
         print(s.text)
