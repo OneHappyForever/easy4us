@@ -51,7 +51,7 @@ def clear(session):
     while True:
         c += 1
         res = session.get(base_url + "/decoder/%s/1" % args.decoder, headers=headers)
-        s = BeautifulSoup(res.content, features="lxml")
+        s = bs4.BeautifulSoup(res.content, features="lxml")
         inputs = s.find_all(attrs={"name": "file[]"})
         if len(inputs) < 1:
             print()
@@ -67,7 +67,7 @@ def clear(session):
 
 
 def parse_upload_result(r):
-    s = BeautifulSoup(r.content, features="lxml")
+    s = bs4.BeautifulSoup(r.content, features="lxml")
     success = []
     failure = []
     for el in s.find_all("div", {"class": "alert-success"}):
