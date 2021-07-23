@@ -83,7 +83,7 @@ def parse_upload_result(r):
 
 def upload(session, dir, files):
     r = session.get(base_url + "/decoder/%s" % args.decoder, headers=headers, timeout=300)
-    s = BeautifulSoup(r.content, features="lxml")
+    s = bs4.BeautifulSoup(r.content, features="lxml")
     el = s.find(id="uploadfileblue")
     if not el:
         print(s.text)
